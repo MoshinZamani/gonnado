@@ -1,0 +1,18 @@
+html {
+  display: flex;
+  justify-content: center;
+}
+
+#root {
+  display: flex;
+  justify-content: center;
+  background-color: #987eff;
+  width: 100%;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  background-color: #987eff;
+  width: 100%;
+}

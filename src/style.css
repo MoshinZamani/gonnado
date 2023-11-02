@@ -1,0 +1,49 @@
+/** <Profile /> */
+.profile_main {
+  display: flex;
+  width: 80%;
+  background-color: #fff;
+  border-radius: 20px;
+}
+
+.menu {
+  width: 30%;
+  height: 50vh;
+}
+
+.content {
+  height: 50vh;
+  width: 70%;
+  background-color: #a18aff;
+  border: 10px solid white;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+/** <Profile /> */
+.home_main {
+  width: 30%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.team,
+.personal {
+  display: flex;
+  justify-content: center;
+  width: 20%;
+  padding: 1em 0;
+  background-color: #fff;
+  justify-content: center;
+  align-items: center;
+  color: #828191;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+.team:hover,
+.personal:hover {
+  background-color: #d20030;
+  color: #fff;
+}
