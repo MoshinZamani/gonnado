@@ -51,14 +51,14 @@
 /** <Personal /> */
 .personal_main {
   display: flex;
-  width: 80%;
+  width: 60%;
   height: 70vh;
   border: #ffffff 10px solid;
   border-radius: 25px;
 }
 
 .personal_sidebar {
-  width: 30%;
+  width: 35%;
   background-color: #fff;
   display: flex;
   flex-direction: column;
@@ -66,7 +66,7 @@
 }
 
 .personal_main_content {
-  width: 70%;
+  width: 65%;
   background-color: #a18aff;
   border-top-right-radius: 25px;
   border-bottom-right-radius: 25px;
@@ -80,10 +80,33 @@
 
 .personal_sidebar_top {
   width: 80%;
-  border: 1px solid black;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 1em;
+}
+
+.personal_sidebar_top span {
+  color: #987eff;
+  font-weight: 700;
 }
 
 .personal_sidebar_bottom {
   width: 80%;
-  border: 1px solid black;
+  margin-top: 2em;
+}
+
+.personal_main_content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.personal_main_content_form form {
+  display: flex;
+  flex-direction: column;
+}
+
+.personal_sidebar_bottom li {
+  list-style-type: circle;
 }
