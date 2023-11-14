@@ -20,7 +20,7 @@
   border-bottom-right-radius: 20px;
 }
 
-/** <Profile /> */
+/** <Home /> */
 .home_main {
   width: 30%;
   display: flex;
@@ -46,4 +46,44 @@
 .personal:hover {
   background-color: #d20030;
   color: #fff;
+}
+
+/** <Personal /> */
+.personal_main {
+  display: flex;
+  width: 80%;
+  height: 70vh;
+  border: #ffffff 10px solid;
+  border-radius: 25px;
+}
+
+.personal_sidebar {
+  width: 30%;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.personal_main_content {
+  width: 70%;
+  background-color: #a18aff;
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+}
+
+.personal_image {
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+}
+
+.personal_sidebar_top {
+  width: 80%;
+  border: 1px solid black;
+}
+
+.personal_sidebar_bottom {
+  width: 80%;
+  border: 1px solid black;
 }
