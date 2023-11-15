@@ -8,6 +8,7 @@ import profile from "../assets/Mo.jpg";
 import "../style.css";
 
 const Personal: React.FC = () => {
+  const [doneTasks, setDoneTasks] = useState<Tasks[]>([]);
   const [tasks, setTasks] = useState<Tasks[]>([]);
   const [edit, setEdit] = useState<Tasks>({
     id: Date.now(),
@@ -16,6 +17,26 @@ const Personal: React.FC = () => {
     dueDate: "",
     isDone: false,
   });
+
+  const handleDelete = (task: Tasks): void => {
+    const filteredTasks = tasks.filter((t) => t.id !== task.id);
+    setTasks(filteredTasks);
+  };
+
+  const handleDone = (task: Tasks): void => {
+    const filteredTasks = tasks.filter((t) => t.id !== task.id);
+    setTasks(filteredTasks);
+    setDoneTasks([
+      ...doneTasks,
+      {
+        id: task.id,
+        name: task.name,
+        desc: task.desc,
+        dueDate: task.dueDate,
+        isDone: true,
+      },
+    ]);
+  };
 
   const handleSubmit = (
     e: React.FormEvent<HTMLFormElement>,
@@ -74,10 +95,10 @@ const Personal: React.FC = () => {
               <span className="edit" onClick={() => setEdit(t)}>
                 <MdEdit />
               </span>
-              <span className="done">
+              <span className="done" onClick={() => handleDone(t)}>
                 <MdOutlineDone />
               </span>
-              <span className="delete">
+              <span className="delete" onClick={() => handleDelete(t)}>
                 <MdDelete />
               </span>
             </li>
@@ -85,6 +106,9 @@ const Personal: React.FC = () => {
           <h4 className="completed_task">
             <LuCalendarCheck /> Completed tasks
           </h4>
+          {doneTasks.map((d) => (
+            <li key={d.id}>{d.name}</li>
+          ))}
         </div>
       </div>
       <div className="personal_main_content">
