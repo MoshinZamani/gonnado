@@ -1,81 +1,21 @@
 import React, { useState } from "react";
 import TaskField from "./TaskField";
 import { AiOutlineCalendar } from "react-icons/ai";
-import { LuCalendarCheck } from "react-icons/lu";
-import { MdOutlineDone, MdEdit, MdDelete } from "react-icons/md";
+import { IoCheckmarkDoneCircleOutline } from "react-icons/io5";
+import { IoIosAddCircleOutline } from "react-icons/io";
+import { BsCalendarDay, BsCalendarMonth } from "react-icons/bs";
+import { VscCalendar } from "react-icons/vsc";
+import ShowCompleted from "./ShowCompleted";
+import ShowTasks from "./ShowTasks";
 import { Tasks } from "../models/tasks";
 import profile from "../assets/Mo.jpg";
 import "../style.css";
 
 const Personal: React.FC = () => {
+  const [flag, setFlag] = useState<string>("tasks");
+  const [timing, setTiming] = useState("");
   const [doneTasks, setDoneTasks] = useState<Tasks[]>([]);
   const [tasks, setTasks] = useState<Tasks[]>([]);
-  const [edit, setEdit] = useState<Tasks>({
-    id: Date.now(),
-    name: "",
-    desc: "",
-    dueDate: "",
-    isDone: false,
-  });
-
-  const handleDelete = (task: Tasks): void => {
-    const filteredTasks = tasks.filter((t) => t.id !== task.id);
-    setTasks(filteredTasks);
-  };
-
-  const handleDone = (task: Tasks): void => {
-    const filteredTasks = tasks.filter((t) => t.id !== task.id);
-    setTasks(filteredTasks);
-    setDoneTasks([
-      ...doneTasks,
-      {
-        id: task.id,
-        name: task.name,
-        desc: task.desc,
-        dueDate: task.dueDate,
-        isDone: true,
-      },
-    ]);
-  };
-
-  const handleSubmit = (
-    e: React.FormEvent<HTMLFormElement>,
-    taskName: string,
-    desc: string,
-    dueDate: string
-  ) => {
-    e.preventDefault();
-
-    if (edit.name.length === 0) {
-      setTasks([
-        ...tasks,
-        {
-          id: Date.now(),
-          name: taskName,
-          desc: desc,
-          dueDate: dueDate,
-          isDone: false,
-        },
-      ]);
-      console.log(tasks);
-    } else {
-      const editedTask = tasks.filter((t) => t.name === edit.name);
-      const filteredTasks = tasks.filter((t) => t.name !== edit.name);
-      const finalfiltered = [
-        ...filteredTasks,
-        {
-          id: editedTask[0].id,
-          name: taskName,
-          desc: desc,
-          dueDate: dueDate,
-          isDone: editedTask[0].isDone,
-        },
-      ];
-      finalfiltered.sort((a, b) => a.id - b.id);
-      console.log(finalfiltered);
-      setTasks(finalfiltered);
-    }
-  };
 
   return (
     <div className="personal_main">
@@ -84,38 +24,78 @@ const Personal: React.FC = () => {
           <img className="personal_image" src={profile} alt="Profile Image" />
           <span>Mo Zamani</span>
         </div>
+        <br />
+        <hr />
         <div className="personal_sidebar_bottom">
-          <h4 className="today_task">
-            <AiOutlineCalendar />
-            Recent tasks
+          <a
+            title="Add new task"
+            onClick={() => setFlag("add")}
+            className="add_task"
+          >
+            <IoIosAddCircleOutline />
+            &nbsp;&nbsp; Add new task
+          </a>
+          <a onClick={() => setFlag("tasks")}>
+            <h4 className="today_task">
+              <AiOutlineCalendar />
+              &nbsp;&nbsp; Recent tasks
+            </h4>
+          </a>
+          <div className="timing">
+            <a
+              onClick={() => {
+                setFlag("tasks");
+                setTiming("weekly");
+              }}
+            >
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <BsCalendarDay />
+              &nbsp;&nbsp; Weekly
+            </a>
+            <a
+              onClick={() => {
+                setFlag("tasks");
+                setTiming("monthly");
+              }}
+            >
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <BsCalendarMonth />
+              &nbsp;&nbsp; Monthly
+            </a>
+            <a
+              onClick={() => {
+                setFlag("tasks");
+                setTiming("yearly");
+              }}
+            >
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <VscCalendar />
+              &nbsp;&nbsp; Yearly
+            </a>
+          </div>
+
+          <h4 onClick={() => setFlag("done")} className="completed_task">
+            <IoCheckmarkDoneCircleOutline /> &nbsp;&nbsp;Completed tasks
           </h4>
-          {tasks.map((t) => (
-            <li key={t.name}>
-              {t.name}
-              <span className="edit" onClick={() => setEdit(t)}>
-                <MdEdit />
-              </span>
-              <span className="done" onClick={() => handleDone(t)}>
-                <MdOutlineDone />
-              </span>
-              <span className="delete" onClick={() => handleDelete(t)}>
-                <MdDelete />
-              </span>
-            </li>
-          ))}
-          <h4 className="completed_task">
-            <LuCalendarCheck /> Completed tasks
-          </h4>
-          {doneTasks.map((d) => (
-            <li key={d.id}>{d.name}</li>
-          ))}
         </div>
       </div>
       <div className="personal_main_content">
         <h2>gonnado</h2>
         <div className="enter_task">
           <div className="personal_main_content_form">
-            <TaskField handleSubmit={handleSubmit} edit={edit} />
+            {flag === "add" ? (
+              <TaskField setTasks={setTasks} tasks={tasks} />
+            ) : flag === "tasks" ? (
+              <ShowTasks
+                tasks={tasks}
+                setTasks={setTasks}
+                doneTasks={doneTasks}
+                setDoneTasks={setDoneTasks}
+                timing={timing}
+              />
+            ) : (
+              <ShowCompleted doneTasks={doneTasks} />
+            )}
           </div>
         </div>
       </div>

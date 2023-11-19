@@ -1,3 +1,26 @@
+/** global */
+.default {
+  width: 55%;
+  display: flex;
+  flex-direction: column;
+}
+.default div {
+  padding: 1em;
+  font-weight: 600;
+}
+
+.default .desc {
+  display: block;
+  height: 30%;
+  background-color: #fff;
+  border-radius: 25px;
+  padding: 0.5em 0 0.5em 1em;
+}
+
+.default .no_desc {
+  display: none;
+}
+
 /** <Profile /> */
 .profile_main {
   display: flex;
@@ -58,15 +81,21 @@
 }
 
 .personal_sidebar {
-  width: 35%;
+  width: 25%;
   background-color: #fff;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
+.personal_sidebar hr {
+  width: 80%;
+  height: 1px;
+  background-color: #a18aff;
+}
+
 .personal_main_content {
-  width: 65%;
+  width: 75%;
   background-color: #a18aff;
   border-top-right-radius: 25px;
   border-bottom-right-radius: 25px;
@@ -102,6 +131,10 @@
   align-items: center;
 }
 
+.personal_main_content .enter_task {
+  width: 100%;
+}
+
 .personal_main_content_form form {
   display: flex;
   flex-direction: column;
@@ -109,4 +142,120 @@
 
 .personal_sidebar_bottom li {
   list-style-type: circle;
+}
+
+.add_task,
+.today_task {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  color: #6d6a6a;
+}
+
+.timing {
+  display: flex;
+  flex-direction: column;
+}
+
+/** <ShowTasks /> */
+.showTasks_main {
+  display: flex;
+  justify-content: space-around;
+}
+
+.showTasks_main .tasks {
+  width: 40%;
+  list-style: none;
+  color: #ff058f;
+  font-weight: 500;
+}
+
+.showTasks_main .desc {
+  width: 55%;
+  background-color: #fff;
+  border-radius: 25px;
+}
+
+.showTasks_main .tasks li {
+  display: flex;
+  justify-content: space-around;
+  background-color: #fff;
+  color: #ff058f;
+  padding: 0.5em 0 0.5em 0.5em;
+  margin-bottom: 0.5em;
+  border-radius: 25px;
+}
+
+.showTasks_main .tasks li:hover {
+  transform: scale(1.05, 1.1);
+  transition: transform 1s;
+}
+.showTasks_main .tasks li .actions {
+  width: 50%;
+
+  display: flex;
+  justify-content: space-around;
+}
+
+.showTasks_main .tasks li .actions a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.completed_task {
+  color: #6d6a6a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/** <ShowCompleted /> */
+.showCompleted_main {
+  display: flex;
+  justify-content: space-around;
+}
+.showCompleted_main li:hover {
+  transform: scale(1.1, 1.1);
+  transition: transform 1s;
+}
+
+.showCompleted_main li:focus {
+  background-color: #fff;
+}
+
+.showCompleted_main li {
+  background-color: #ff058f;
+  margin-bottom: 0.5em;
+  border-radius: 25px;
+  list-style: none;
+  color: #fff;
+  font-weight: 500;
+  padding: 0.5em 0 0.5em 1em;
+}
+
+.showCompleted_main .doneTasks {
+  width: 30%;
+}
+
+/** <TaskField /> */
+.taskField_main {
+  display: flex;
+  justify-content: center;
+}
+
+.taskField_main form {
+  width: 70%;
+}
+
+.taskField_main .button {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.taskField_main .button button:first-child {
+  background-color: #93ff7e;
+}
+
+.taskField_main .button button:last-child {
+  background-color: #d20030;
 }
