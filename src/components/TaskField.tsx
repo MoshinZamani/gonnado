@@ -1,60 +1,77 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Tasks } from "../models/tasks";
 
 type Props = {
-  handleSubmit: (
-    e: React.FormEvent<HTMLFormElement>,
-    taskName: string,
-    desc: string,
-    dueDate: string
-  ) => void;
-  edit: Tasks;
+  setTasks: React.Dispatch<React.SetStateAction<Tasks[]>>;
+  tasks: Tasks[];
 };
 
-const TaskField: React.FC<Props> = ({ handleSubmit, edit }) => {
-  const [taskName, setTaskName] = useState<string>("");
+const TaskField: React.FC<Props> = ({ setTasks, tasks }) => {
+  const [name, setName] = useState<string>("");
   const [desc, setDesc] = useState<string>("");
   const [dueDate, setDueDate] = useState<string>("");
 
-  useEffect(() => {
-    setDesc(edit.desc);
-    setDueDate(edit.dueDate);
-    setTaskName(edit.name);
-  }, [edit]);
-
   const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    handleSubmit(e, taskName, desc, dueDate);
+    e.preventDefault();
+    setTasks([
+      ...tasks,
+      {
+        id: Date.now(),
+        name: name,
+        desc: desc,
+        dueDate: dueDate,
+        isDone: false,
+      },
+    ]);
     setDesc("");
     setDueDate("");
-    setTaskName("");
+    setName("");
   };
 
   return (
-    <form onSubmit={(e) => handleOnSubmit(e)}>
-      <h5>Enter a task</h5>
-      <input
-        value={taskName}
-        type="text"
-        placeholder="Name"
-        name="name"
-        onChange={(e) => setTaskName(e.target.value)}
-      />
-      <textarea
-        value={desc}
-        placeholder="Description"
-        name="desc"
-        onChange={(e) => setDesc(e.target.value)}
-      ></textarea>
-      <label htmlFor="dueDate">Due date :</label>
-      <input
-        value={dueDate}
-        type="date"
-        id="dueDate"
-        name="dueDate"
-        onChange={(e) => setDueDate(e.target.value)}
-      />
-      <button>Go</button>
-    </form>
+    <div className="taskField_main">
+      <form id="add_new_task" onSubmit={(e) => handleOnSubmit(e)}>
+        <h5>Enter a task</h5>
+        <br />
+        <input
+          value={name}
+          type="text"
+          placeholder="Name"
+          name="name"
+          onChange={(e) => setName(e.target.value)}
+        />
+        <br />
+        <textarea
+          value={desc}
+          placeholder="Description"
+          name="desc"
+          onChange={(e) => setDesc(e.target.value)}
+        ></textarea>
+        <br />
+        <label htmlFor="dueDate">Due date :</label>
+        <input
+          value={dueDate}
+          type="date"
+          id="dueDate"
+          name="dueDate"
+          onChange={(e) => setDueDate(e.target.value)}
+        />
+        <br />
+        <div className="button">
+          <button>Add</button>&nbsp;&nbsp;&nbsp;
+          <button
+            onClick={() => {
+              setName("");
+              setDesc("");
+              setDueDate("");
+            }}
+            type="reset"
+          >
+            Reset
+          </button>
+        </div>
+      </form>
+    </div>
   );
 };
 
