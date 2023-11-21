@@ -72,6 +72,26 @@
 }
 
 /** <Personal /> */
+.logo {
+  display: flex;
+  margin: 1em 0;
+}
+
+.logo_gonna,
+.logo_do {
+  font-family: Pacifico;
+  font-weight: bolder;
+  font-size: xx-large;
+}
+
+.logo_gonna {
+  color: #fff;
+}
+
+.logo_do {
+  color: #d20030;
+}
+
 .personal_main {
   display: flex;
   width: 60%;

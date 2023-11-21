@@ -6,13 +6,14 @@ import { IoIosAddCircleOutline } from "react-icons/io";
 import { BsCalendarDay, BsCalendarMonth } from "react-icons/bs";
 import { VscCalendar } from "react-icons/vsc";
 import ShowCompleted from "./ShowCompleted";
+import About from "./About";
 import ShowTasks from "./ShowTasks";
 import { Tasks } from "../models/tasks";
-import profile from "../assets/Mo.jpg";
+import dog from "../assets/dog.jpg";
 import "../style.css";
 
 const Personal: React.FC = () => {
-  const [flag, setFlag] = useState<string>("tasks");
+  const [flag, setFlag] = useState<string>("");
   const [timing, setTiming] = useState("");
   const [doneTasks, setDoneTasks] = useState<Tasks[]>([]);
   const [tasks, setTasks] = useState<Tasks[]>([]);
@@ -21,7 +22,7 @@ const Personal: React.FC = () => {
     <div className="personal_main">
       <div className="personal_sidebar">
         <div className="personal_sidebar_top">
-          <img className="personal_image" src={profile} alt="Profile Image" />
+          <img className="personal_image" src={dog} alt="Profile Image" />
           <span>Mo Zamani</span>
         </div>
         <br />
@@ -32,11 +33,13 @@ const Personal: React.FC = () => {
             onClick={() => setFlag("add")}
             className="add_task"
           >
+            &nbsp;&nbsp;
             <IoIosAddCircleOutline />
             &nbsp;&nbsp; Add new task
           </a>
           <a onClick={() => setFlag("tasks")}>
             <h4 className="today_task">
+              &nbsp;&nbsp;
               <AiOutlineCalendar />
               &nbsp;&nbsp; Recent tasks
             </h4>
@@ -80,7 +83,10 @@ const Personal: React.FC = () => {
         </div>
       </div>
       <div className="personal_main_content">
-        <h2>gonnado</h2>
+        <div className="logo">
+          <span className="logo_gonna">Gonna</span>
+          <span className="logo_do">Do</span>
+        </div>
         <div className="enter_task">
           <div className="personal_main_content_form">
             {flag === "add" ? (
@@ -93,8 +99,10 @@ const Personal: React.FC = () => {
                 setDoneTasks={setDoneTasks}
                 timing={timing}
               />
-            ) : (
+            ) : flag === "done" ? (
               <ShowCompleted doneTasks={doneTasks} />
+            ) : (
+              <About />
             )}
           </div>
         </div>
