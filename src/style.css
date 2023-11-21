@@ -114,6 +114,12 @@
   background-color: #a18aff;
 }
 
+.personal_sidebar_bottom a:hover,
+.today_task:hover,
+.completed_task:hover {
+  color: #d20030;
+}
+
 .personal_main_content {
   width: 75%;
   background-color: #a18aff;
@@ -278,4 +284,9 @@
 
 .taskField_main .button button:last-child {
   background-color: #d20030;
+}
+
+/** <About /> */
+.about_main {
+  margin: 2em;
 }

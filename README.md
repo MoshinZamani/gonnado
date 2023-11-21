@@ -15,3 +15,7 @@
 - git pull origin master
 - npm install
 - npm run dev
+
+## Additional information
+
+### There is two sections as 'Team' and 'Personal', but only the 'Personal' is complete for now
